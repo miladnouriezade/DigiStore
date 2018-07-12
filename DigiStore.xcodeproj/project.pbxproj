@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		64653EF820F7AC7C001091B3 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64653EF620F7AC7C001091B3 /* SearchResultCell.swift */; };
+		64653EF920F7AC7C001091B3 /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64653EF720F7AC7C001091B3 /* SearchResultCell.xib */; };
+		64653EFB20F7BB05001091B3 /* NothingFoundCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64653EFA20F7BB05001091B3 /* NothingFoundCell.xib */; };
 		64B6CBFA20F7505A00DFA0DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6CBF920F7505A00DFA0DF /* AppDelegate.swift */; };
 		64B6CBFC20F7505A00DFA0DF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6CBFB20F7505A00DFA0DF /* SearchViewController.swift */; };
 		64B6CBFE20F7505A00DFA0DF /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6CBFD20F7505A00DFA0DF /* SecondViewController.swift */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		64653EF620F7AC7C001091B3 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		64653EF720F7AC7C001091B3 /* SearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
+		64653EFA20F7BB05001091B3 /* NothingFoundCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NothingFoundCell.xib; sourceTree = "<group>"; };
 		64B6CBF620F7505A00DFA0DF /* DigiStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigiStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64B6CBF920F7505A00DFA0DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64B6CBFB20F7505A00DFA0DF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +45,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		64653EF120F7AB9B001091B3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				64B6CBFB20F7505A00DFA0DF /* SearchViewController.swift */,
+				64B6CBFD20F7505A00DFA0DF /* SecondViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		64653EF220F7ABD4001091B3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				64653EF620F7AC7C001091B3 /* SearchResultCell.swift */,
+				64653EF720F7AC7C001091B3 /* SearchResultCell.xib */,
+				64653EFA20F7BB05001091B3 /* NothingFoundCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		64653EF320F7ABE0001091B3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				64B6CC0D20F7518400DFA0DF /* SearchResult.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		64B6CBED20F7505A00DFA0DF = {
 			isa = PBXGroup;
 			children = (
@@ -58,14 +91,14 @@
 		64B6CBF820F7505A00DFA0DF /* DigiStore */ = {
 			isa = PBXGroup;
 			children = (
+				64653EF320F7ABE0001091B3 /* Model */,
+				64653EF220F7ABD4001091B3 /* View */,
+				64653EF120F7AB9B001091B3 /* Controller */,
 				64B6CBF920F7505A00DFA0DF /* AppDelegate.swift */,
-				64B6CBFB20F7505A00DFA0DF /* SearchViewController.swift */,
-				64B6CBFD20F7505A00DFA0DF /* SecondViewController.swift */,
 				64B6CBFF20F7505A00DFA0DF /* Main.storyboard */,
 				64B6CC0220F7505A00DFA0DF /* Assets.xcassets */,
 				64B6CC0420F7505A00DFA0DF /* LaunchScreen.storyboard */,
 				64B6CC0720F7505A00DFA0DF /* Info.plist */,
-				64B6CC0D20F7518400DFA0DF /* SearchResult.swift */,
 			);
 			path = DigiStore;
 			sourceTree = "<group>";
@@ -131,6 +164,8 @@
 			files = (
 				64B6CC0620F7505A00DFA0DF /* LaunchScreen.storyboard in Resources */,
 				64B6CC0320F7505A00DFA0DF /* Assets.xcassets in Resources */,
+				64653EF920F7AC7C001091B3 /* SearchResultCell.xib in Resources */,
+				64653EFB20F7BB05001091B3 /* NothingFoundCell.xib in Resources */,
 				64B6CC0120F7505A00DFA0DF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,6 +181,7 @@
 				64B6CBFA20F7505A00DFA0DF /* AppDelegate.swift in Sources */,
 				64B6CC0E20F7518400DFA0DF /* SearchResult.swift in Sources */,
 				64B6CBFC20F7505A00DFA0DF /* SearchViewController.swift in Sources */,
+				64653EF820F7AC7C001091B3 /* SearchResultCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
