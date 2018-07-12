@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		64B6CBFA20F7505A00DFA0DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6CBF920F7505A00DFA0DF /* AppDelegate.swift */; };
-		64B6CBFC20F7505A00DFA0DF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6CBFB20F7505A00DFA0DF /* FirstViewController.swift */; };
+		64B6CBFC20F7505A00DFA0DF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6CBFB20F7505A00DFA0DF /* SearchViewController.swift */; };
 		64B6CBFE20F7505A00DFA0DF /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6CBFD20F7505A00DFA0DF /* SecondViewController.swift */; };
 		64B6CC0120F7505A00DFA0DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64B6CBFF20F7505A00DFA0DF /* Main.storyboard */; };
 		64B6CC0320F7505A00DFA0DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64B6CC0220F7505A00DFA0DF /* Assets.xcassets */; };
 		64B6CC0620F7505A00DFA0DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64B6CC0420F7505A00DFA0DF /* LaunchScreen.storyboard */; };
+		64B6CC0E20F7518400DFA0DF /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B6CC0D20F7518400DFA0DF /* SearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		64B6CBF620F7505A00DFA0DF /* DigiStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigiStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64B6CBF920F7505A00DFA0DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		64B6CBFB20F7505A00DFA0DF /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		64B6CBFB20F7505A00DFA0DF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		64B6CBFD20F7505A00DFA0DF /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		64B6CC0020F7505A00DFA0DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		64B6CC0220F7505A00DFA0DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64B6CC0520F7505A00DFA0DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64B6CC0720F7505A00DFA0DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64B6CC0D20F7518400DFA0DF /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,12 +59,13 @@
 			isa = PBXGroup;
 			children = (
 				64B6CBF920F7505A00DFA0DF /* AppDelegate.swift */,
-				64B6CBFB20F7505A00DFA0DF /* FirstViewController.swift */,
+				64B6CBFB20F7505A00DFA0DF /* SearchViewController.swift */,
 				64B6CBFD20F7505A00DFA0DF /* SecondViewController.swift */,
 				64B6CBFF20F7505A00DFA0DF /* Main.storyboard */,
 				64B6CC0220F7505A00DFA0DF /* Assets.xcassets */,
 				64B6CC0420F7505A00DFA0DF /* LaunchScreen.storyboard */,
 				64B6CC0720F7505A00DFA0DF /* Info.plist */,
+				64B6CC0D20F7518400DFA0DF /* SearchResult.swift */,
 			);
 			path = DigiStore;
 			sourceTree = "<group>";
@@ -141,7 +144,8 @@
 			files = (
 				64B6CBFE20F7505A00DFA0DF /* SecondViewController.swift in Sources */,
 				64B6CBFA20F7505A00DFA0DF /* AppDelegate.swift in Sources */,
-				64B6CBFC20F7505A00DFA0DF /* FirstViewController.swift in Sources */,
+				64B6CC0E20F7518400DFA0DF /* SearchResult.swift in Sources */,
+				64B6CBFC20F7505A00DFA0DF /* SearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
