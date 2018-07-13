@@ -35,6 +35,7 @@ class SearchViewController: UIViewController {
         
         
         tableView.rowHeight = 80
+        searchBar.becomeFirstResponder()
         
         tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         
