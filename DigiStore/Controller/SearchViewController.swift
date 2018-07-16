@@ -16,11 +16,13 @@ class SearchViewController: UIViewController {
     
     var searchResults = [SearchResult]()
     var hasSearched:Bool = false
+    var isLoading = false
     
     
     struct TableViewCellIdentifiers{
         static let searchResultCell = "SearchResultCell"
         static let nothingFoundCell = "NothingFoundCell"
+        static let loadingCell = "LoadingCell"
     }
     
     override func viewDidLoad() {
@@ -32,6 +34,9 @@ class SearchViewController: UIViewController {
         
         cellNib = UINib(nibName: TableViewCellIdentifiers.nothingFoundCell, bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.nothingFoundCell)
+        
+        cellNib = UINib(nibName: TableViewCellIdentifiers.loadingCell, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.loadingCell)
         
         
         tableView.rowHeight = 80
@@ -222,21 +227,34 @@ extension SearchViewController:UISearchBarDelegate{
             searchResults = []
             hasSearched = true
             
-            let url = iTuensUrl(searchText: searchBar.text!)
-            print("URL:\(url)")
+
+            isLoading = true
+            tableView.reloadData()
             
-            if let jsonString = performStoreRequest(url: url){
-                if let jsonDict = parse(json: jsonString){
-                    searchResults = parse(dictionary: jsonDict)
-                    searchResults.sort(by: {
-                        (result1:SearchResult,result2:SearchResult) in
-                        return result1.name.localizedCompare(result2.name) == .orderedAscending
-                    })
-                    tableView.reloadData()
-                    return
+            let queue = DispatchQueue.global()
+            queue.async {
+                
+                let url = self.iTuensUrl(searchText: searchBar.text!)
+                
+                if let jsonString = self.performStoreRequest(url: url){
+                    if let jsonDict = self.parse(json: jsonString){
+                        self.searchResults = self.parse(dictionary: jsonDict)
+                        
+                        self.searchResults.sort(by: {
+                            (result1:SearchResult,result2:SearchResult) in
+                            return result1.name.localizedCompare(result2.name) == .orderedAscending
+                        })
+                        DispatchQueue.main.async {
+                            self.isLoading = false
+                            self.tableView.reloadData()
+                        }
+                        return
+                    }
+                }
+                DispatchQueue.main.async {
+                      self.showError()
                 }
             }
-            showError()
         }
     }
     
@@ -252,7 +270,7 @@ extension SearchViewController:UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if searchResults.count == 0{
+        if searchResults.count == 0 || isLoading {
             return nil
         }else{
             return indexPath
@@ -265,7 +283,9 @@ extension SearchViewController:UITableViewDataSource{
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !hasSearched{
+        if isLoading{
+            return 1
+        }else if !hasSearched{
             return 0
         }else if searchResults.count == 0{
             return 1
@@ -275,9 +295,18 @@ extension SearchViewController:UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if searchResults.count == 0{
+        if isLoading{
+            let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellIdentifiers.loadingCell, for: indexPath)
+            
+            let spinner = cell.viewWithTag(100) as! UIActivityIndicatorView
+            spinner.startAnimating()
+            return cell
+            
+        }else if searchResults.count == 0{
             return tableView.dequeueReusableCell(withIdentifier: TableViewCellIdentifiers.nothingFoundCell, for: indexPath)
+            
         }else{
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellIdentifiers.searchResultCell,
                                                      for: indexPath) as! SearchResultCell
             let searchResult = searchResults[indexPath.row]
