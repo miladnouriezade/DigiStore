@@ -55,20 +55,7 @@ class SearchViewController: UIViewController {
         return url!
     }
     
-    func performStoreRequest(url:URL) -> String? {
-        do {
-            return try String(contentsOf: url, encoding:.utf8)
-        } catch  {
-            print("Download Error:\(error)")
-            return nil
-        }
-        
-    }
-    
-    func parse(json:String) -> Dictionary<String,Any>? {
-        guard let data = json.data(using: .utf8, allowLossyConversion: false)
-            else{return nil}
-        
+    func parse(json data:Data) -> [String:Any]? {
         do {
             return try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any]
         }catch  {
@@ -231,30 +218,40 @@ extension SearchViewController:UISearchBarDelegate{
             isLoading = true
             tableView.reloadData()
             
-            let queue = DispatchQueue.global()
-            queue.async {
+            let url = iTuensUrl(searchText: searchBar.text!)
+            let session = URLSession.shared
+            let dataTask = session.dataTask(with: url){
+                data, response, error in
                 
-                let url = self.iTuensUrl(searchText: searchBar.text!)
-                
-                if let jsonString = self.performStoreRequest(url: url){
-                    if let jsonDict = self.parse(json: jsonString){
-                        self.searchResults = self.parse(dictionary: jsonDict)
+                if let error = error{
+                    print("Failure!\(error)")
+                    
+                }else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200{
+                    if let data = data, let jsonDict = self.parse(json: data){
                         
-                        self.searchResults.sort(by: {
-                            (result1:SearchResult,result2:SearchResult) in
-                            return result1.name.localizedCompare(result2.name) == .orderedAscending
-                        })
+                        self.searchResults = self.parse(dictionary: jsonDict)
+                        self.searchResults.sort{
+                            result1, result2 in
+                            result1.name.localizedCompare(result2.name) == .orderedAscending
+                        }
+                        
                         DispatchQueue.main.async {
                             self.isLoading = false
                             self.tableView.reloadData()
                         }
                         return
                     }
+                }else{
+                    print("Failure!\(response!)")
                 }
                 DispatchQueue.main.async {
-                      self.showError()
+                    self.hasSearched = false
+                    self.isLoading = false
+                    self.tableView.reloadData()
+                    self.showError()
                 }
             }
+            dataTask.resume()
         }
     }
     
