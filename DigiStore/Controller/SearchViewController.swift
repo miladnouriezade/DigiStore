@@ -19,6 +19,8 @@ class SearchViewController: UIViewController {
     var hasSearched:Bool = false
     var isLoading = false
     
+    var landscapeViewController : LandscapeViewController?
+    
     
     struct TableViewCellIdentifiers{
         static let searchResultCell = "SearchResultCell"
@@ -47,6 +49,17 @@ class SearchViewController: UIViewController {
 
         
     }
+    
+    //Landscape mode detection
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        switch newCollection.verticalSizeClass {
+        case .compact:
+            showLandscape()
+        case .regular, .unspecified:
+            hideLandscape()
+        }
+    }
+    
     
     func iTuensUrl(searchText:String, category: Int) -> URL {
         let entityName:String
@@ -259,9 +272,36 @@ class SearchViewController: UIViewController {
         }
     }
     
+    //MARK: - LandscapeVC
+    
+    func showLandscape() {
+        guard landscapeViewController == nil else{ return}
+        
+        landscapeViewController = storyboard!.instantiateViewController(
+            withIdentifier: "LandscapeViewController") as? LandscapeViewController
+        
+        if let controller = landscapeViewController {
+            controller.view.frame = view.bounds
+            
+            view.addSubview(controller.view)
+            addChildViewController(controller)
+            controller.didMove(toParentViewController: self)
+        }
+    }
+    
+    func hideLandscape() {
+        if let controller = landscapeViewController {
+            controller.willMove(toParentViewController: nil)
+            controller.view.removeFromSuperview()
+            controller.removeFromParentViewController()
+            landscapeViewController = nil
+        }
+    }
+    
     
     
 }
+//MARK: - serachVC extentions
 
 extension SearchViewController:UISearchBarDelegate{
     
